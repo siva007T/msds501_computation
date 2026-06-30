@@ -32,9 +32,15 @@ readings = ['72.1', '68.5', 'N/A', '74.0', 'sensor_error', '69.3']
 valid = []
 
 for i, r in enumerate(readings):
-    temp = float(r)           # <-- this line crashes on bad strings
+    try:
+        temp = float(r)  
+        temp = float(r)  
+    except ValueError:  
+              print(f'Bad at [{i}]: {r}')
+ # <- this line crashes on bad strings
     print(f'Reading [{i}]: {temp}')
     valid.append(temp)
-
+# the error is because you're taking in string in place of a float. 
+# you're trying to multiply and divide with strings which is not possible
 average = sum(valid) / len(valid)
 print(f'Average of valid readings: {round(average, 2)}')
