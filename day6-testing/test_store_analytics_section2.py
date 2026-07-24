@@ -39,6 +39,7 @@ def test_parse_order_row_valid_row():
     }
 
 
+<<<<<<< HEAD
 """
 parse_order_row_valid_row
 
@@ -498,3 +499,33 @@ def test_write_top_products_report(report_summary, n, expected_lines,output_file
         actual_lines = f.read().splitlines()
         assert expected_lines == actual_lines
 
+=======
+def test_parse_order_row_missing_order_id():
+    row = ["", "Widget", "4", "9.99", "alice@example.com"]
+    with pytest.raises(ValueError):
+        parse_order_row(row)
+
+def test_parse_order_row_wrong_number_of_fields():
+    row = ["Widget", "4", "9.99", "alice@example.com"]
+    with pytest.raises(ValueError):
+        parse_order_row(row)
+
+def test_compute_line_total():
+    order = {
+        "order_id": "1001",
+        "product": "widget",
+        "quantity": 3,
+        "unit_price": 9.99,
+        "customer_email": "alice@example.com",
+    }
+    assert compute_line_total(order) == 29.97
+
+
+def test_loyalty_tier_platinum():
+    total_spent = 10001
+    assert loyalty_tier(total_spent) == "platinum"
+
+def test_loyalty_tier_silver():
+    total_spent = 150
+    assert loyalty_tier(total_spent) == "silver"
+>>>>>>> upstream/main

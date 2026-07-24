@@ -39,6 +39,7 @@ def test_parse_order_row_valid_row():
     }
 
 
+<<<<<<< HEAD
 # --- Your tests go below here ----------------------------------------------
 def test_parse_order_row_invalid(): 
     with pytest.raises(ValueError, match="expected 5 fields"):
@@ -134,3 +135,33 @@ def test_write_top_products_report(tmp_path):
     write_top_products_report(summary, report_file, n=1)
     content = report_file.read_text()
     assert content == "coffee mug: $50.0 (5 units)\n"
+=======
+def test_parse_order_row_missing_order_id():
+    row = ["", "Widget", "4", "9.99", "alice@example.com"]
+    with pytest.raises(ValueError):
+        parse_order_row(row)
+
+def test_parse_order_row_wrong_number_of_fields():
+    row = ["Widget", "4", "9.99", "alice@example.com"]
+    with pytest.raises(ValueError):
+        parse_order_row(row)
+
+def test_compute_line_total():
+    order = {
+        "order_id": "1001",
+        "product": "widget",
+        "quantity": 3,
+        "unit_price": 9.99,
+        "customer_email": "alice@example.com",
+    }
+    assert compute_line_total(order) == 29.97
+
+
+def test_loyalty_tier_platinum():
+    total_spent = 10001
+    assert loyalty_tier(total_spent) == "platinum"
+
+def test_loyalty_tier_silver():
+    total_spent = 150
+    assert loyalty_tier(total_spent) == "silver"
+>>>>>>> upstream/main
