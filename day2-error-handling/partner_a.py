@@ -33,6 +33,7 @@ valid = []
 
 for i, r in enumerate(readings):
     try:
+<<<<<<< HEAD
         temp = float(r) 
         valid.append(temp)
         print(f"Reading [{i}]: {temp}") 
@@ -41,5 +42,13 @@ for i, r in enumerate(readings):
  # <- this line crashes on bad strings
 # the error is because you're taking in string in place of a float. 
 # you're trying to multiply and divide with strings which is not possible
+=======
+        temp = float(r)           # <-- this line crashes on bad strings
+        print(f'Reading [{i}]: {temp}')
+        valid.append(temp)
+    except ValueError:
+        print(f'[index {i}] Skipped bad reading: {r}')
+
+>>>>>>> upstream/main
 average = sum(valid) / len(valid)
 print(f'Average of valid readings: {round(average, 2)}')
